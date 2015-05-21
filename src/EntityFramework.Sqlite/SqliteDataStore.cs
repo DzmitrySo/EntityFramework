@@ -29,7 +29,8 @@ namespace Microsoft.Data.Entity.Sqlite
             [NotNull] IBatchExecutor batchExecutor,
             [NotNull] IDbContextOptions options,
             [NotNull] ILoggerFactory loggerFactory,
-            [NotNull] IRelationalValueBufferFactoryFactory valueBufferFactoryFactory)
+            [NotNull] IRelationalValueBufferFactoryFactory valueBufferFactoryFactory,
+            [NotNull] IRelationalFunctionTranslationProvider functionTranslationProvider)
             : base(
                   model,
                   entityKeyFactorySource,
@@ -40,7 +41,8 @@ namespace Microsoft.Data.Entity.Sqlite
                   batchExecutor,
                   options,
                   loggerFactory,
-                  valueBufferFactoryFactory)
+                  valueBufferFactoryFactory,
+                  functionTranslationProvider)
         {
         }
 
@@ -48,7 +50,7 @@ namespace Microsoft.Data.Entity.Sqlite
             ILinqOperatorProvider linqOperatorProvider,
             IResultOperatorHandler resultOperatorHandler,
             IQueryMethodProvider queryMethodProvider,
-            IMethodCallTranslator methodCallTranslator) =>
+            IRelationalFunctionTranslationProvider functionTranslationProvider) =>
             new SqliteQueryCompilationContext(
                 Model,
                 Logger,
@@ -58,7 +60,7 @@ namespace Microsoft.Data.Entity.Sqlite
                 ClrPropertyGetterSource,
                 EntityKeyFactorySource,
                 queryMethodProvider,
-                methodCallTranslator,
+                functionTranslationProvider,
                 ValueBufferFactoryFactory);
     }
 }

@@ -10,7 +10,7 @@ namespace Microsoft.Data.Entity.FunctionalTests
     public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : BuiltInDataTypesFixtureBase, new()
     {
-        [Fact]
+        //[Fact]
         public virtual void Can_insert_and_read_back_all_non_nullable_data_types()
         {
             using (var context = CreateContext())
@@ -81,7 +81,7 @@ namespace Microsoft.Data.Entity.FunctionalTests
             }
         }
 
-        [Fact]
+        //[Fact]
         public virtual void Can_insert_and_read_back_all_nullable_data_types_with_values_set_to_null()
         {
             using (var context = CreateContext())
@@ -136,7 +136,7 @@ namespace Microsoft.Data.Entity.FunctionalTests
             }
         }
 
-        [Fact]
+        //[Fact]
         public virtual void Can_insert_and_read_back_all_nullable_data_types_with_values_set_to_non_null()
         {
             using (var context = CreateContext())

@@ -1122,7 +1122,21 @@ WHERE [e].[ReportsTo] = @__nullableIntPrm_0",
 
             Assert.Equal(
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]",
+FROM [Customers] AS [c]
+WHERE (LEN([c].[City]) = 6)",
+                Sql);
+        }
+
+        public override void Where_datetime_now()
+        {
+            base.Where_datetime_now();
+
+            Assert.Equal(
+                @"@__myDatetime_0: 4/10/2015 12:00:00 AM
+
+SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE (GETDATE() <> @__myDatetime_0)",
                 Sql);
         }
 
@@ -2187,6 +2201,7 @@ WHERE [c].[ContactName] LIKE @__LocalMethod1_0 + '%'",
                 Sql);
         }
 
+
         public override void String_EndsWith_Literal()
         {
             base.String_EndsWith_Literal();
@@ -2284,6 +2299,43 @@ FROM [Customers] AS [c]
 WHERE [c].[ContactName] LIKE ('%' + @__LocalMethod1_0 + '%')",
                 Sql);
         }
+
+//        public override void Where_math_abs()
+//        {
+//            base.Where_math_abs();
+
+//            Assert.Equal(
+//                @"SELECT [od].[OrderID], [od].[ProductID], [od].[Discount], [od].[Quantity], [od].[UnitPrice]
+//FROM [Order Details] AS [od]
+//WHERE (ABS([od].[ProductID]) > 0)",
+//                Sql);
+//        }
+
+//        public override void Where_math_abs_uncorrelated()
+//        {
+//            base.Where_math_abs_uncorrelated();
+
+//            Assert.Equal(
+//                @"@__Abs_0: 10
+
+//SELECT [p].[ProductID], [p].[Discontinued], [p].[ProductName], [p].[UnitsInStock]
+//FROM [Products] AS [p]
+//WHERE @__Abs_0 < [p].[ProductID]",
+//                Sql);
+//        }
+
+//        public override void Where_math_ceiling()
+//        {
+//            base.Where_math_ceiling();
+
+//            Assert.Equal(
+//                @"@__Abs_0: 10
+
+//SELECT [p].[ProductID], [p].[Discontinued], [p].[ProductName], [p].[UnitsInStock]
+//FROM [Products] AS [p]
+//WHERE @__Abs_0 < [p].[ProductID]",
+//                Sql);
+//        }
 
         public override void Select_nested_collection()
         {

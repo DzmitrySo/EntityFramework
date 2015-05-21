@@ -35,6 +35,7 @@ namespace Microsoft.Data.Entity.Relational
         public virtual IBatchExecutor BatchExecutor => GetService<BatchExecutor>();
         public virtual IRelationalValueBufferFactoryFactory ValueBufferFactoryFactory => GetService<TypedValueBufferFactoryFactory>();
         public virtual ICommandBatchPreparer CommandBatchPreparer => GetService<CommandBatchPreparer>();
+        public virtual IRelationalFunctionTranslationProvider RelationalFunctionTranslationProvider => GetService<RelationalFunctionTranslationProvider>();
 
         public abstract IHistoryRepository HistoryRepository { get; }
         public abstract IMigrationSqlGenerator MigrationSqlGenerator { get; }
