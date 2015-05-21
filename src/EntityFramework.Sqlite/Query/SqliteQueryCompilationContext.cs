@@ -26,7 +26,7 @@ namespace Microsoft.Data.Entity.Sqlite.Query
             [NotNull] IClrAccessorSource<IClrPropertyGetter> clrPropertyGetterSource,
             [NotNull] IEntityKeyFactorySource entityKeyFactorySource,
             [NotNull] IQueryMethodProvider queryMethodProvider,
-            [NotNull] IMethodCallTranslator methodCallTranslator,
+            [NotNull] IRelationalFunctionTranslationProvider functionTranslationProvider,
             [NotNull] IRelationalValueBufferFactoryFactory valueBufferFactoryFactory)
             : base(
                   model,
@@ -37,7 +37,7 @@ namespace Microsoft.Data.Entity.Sqlite.Query
                   entityKeyFactorySource,
                   clrPropertyGetterSource,
                   queryMethodProvider,
-                  methodCallTranslator,
+                  functionTranslationProvider,
                   valueBufferFactoryFactory)
         {
         }

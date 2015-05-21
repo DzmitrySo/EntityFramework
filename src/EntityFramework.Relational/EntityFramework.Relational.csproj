@@ -68,6 +68,7 @@
     <Compile Include="IRelationalConnection.cs" />
     <Compile Include="IRelationalDataStore.cs" />
     <Compile Include="IRelationalDataStoreCreator.cs" />
+    <Compile Include="IRelationalFunctionTranslationProvider.cs" />
     <Compile Include="IRelationalTypeMapper.cs" />
     <Compile Include="IRelationalValueBufferFactoryFactory.cs" />
     <Compile Include="ISqlGenerator.cs" />
@@ -150,7 +151,10 @@
     <Compile Include="Migrations\Sql\IMigrationSqlGenerator.cs" />
     <Compile Include="Migrations\Sql\MigrationSqlGenerator.cs" />
     <Compile Include="Migrations\Infrastructure\ModelDiffer.cs" />
+    <Compile Include="Query\Expressions\SqlFunctionExpression.cs" />
     <Compile Include="Query\IValueBufferCursor.cs" />
+    <Compile Include="Query\Methods\IPropertyTranslator.cs" />
+    <Compile Include="Query\RelationalFunctionTranslationProvider.cs" />
     <Compile Include="RelationalDatabaseFactory.cs" />
     <Compile Include="RelationalDataStoreServices.cs" />
     <Compile Include="RemappingUntypedValueBufferFactory.cs" />
@@ -204,7 +208,6 @@
     <Compile Include="Query\Expressions\SelectExpression.cs" />
     <Compile Include="Query\Expressions\TableExpression.cs" />
     <Compile Include="Query\IQueryMethodProvider.cs" />
-    <Compile Include="Query\Methods\CompositeMethodCallTranslator.cs" />
     <Compile Include="Query\Methods\EqualsTranslator.cs" />
     <Compile Include="Query\Methods\EndsWithTranslator.cs" />
     <Compile Include="Query\Methods\IMethodCallTranslator.cs" />

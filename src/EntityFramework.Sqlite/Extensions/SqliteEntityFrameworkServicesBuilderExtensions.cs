@@ -34,7 +34,8 @@ namespace Microsoft.Framework.DependencyInjection
                     .AddScoped<SqliteDataStoreConnection>()
                     .AddScoped<SqliteMigrationSqlGenerator>()
                     .AddScoped<SqliteDataStoreCreator>()
-                    .AddScoped<SqliteHistoryRepository>());
+                    .AddScoped<SqliteHistoryRepository>()
+                    .AddScoped<IRelationalFunctionTranslationProvider, SqliteFunctionTranslationProvider>());
 
             return services;
         }
