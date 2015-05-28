@@ -17,6 +17,7 @@ using Microsoft.Data.Entity.SqlServer.ValueGeneration;
 using Microsoft.Data.Entity.Storage;
 using Microsoft.Data.Entity.ValueGeneration;
 using JetBrains.Annotations;
+using Microsoft.Data.Entity.Relational.Query.Methods;
 
 namespace Microsoft.Data.Entity.SqlServer
 {
@@ -44,6 +45,7 @@ namespace Microsoft.Data.Entity.SqlServer
         public override IModificationCommandBatchFactory ModificationCommandBatchFactory => GetService<SqlServerModificationCommandBatchFactory>();
         public override IRelationalValueBufferFactoryFactory ValueBufferFactoryFactory => GetService<UntypedValueBufferFactoryFactory>();
         public override IRelationalMetadataExtensionProvider MetadataExtensionProvider => GetService<SqlServerMetadataExtensionProvider>();
-        public override IRelationalFunctionTranslationProvider RelationalFunctionTranslationProvider => GetService<SqlServerFunctionTranslationProvider>();
+        public override IMethodCallTranslator CompositeMethodCallTranslator => GetService<SqlServerCompositeMethodCallTranslator>();
+        public override IMemberTranslator CompositeMemberTranslator => GetService<SqlServerCompositeMemberTranslator>();
     }
 }

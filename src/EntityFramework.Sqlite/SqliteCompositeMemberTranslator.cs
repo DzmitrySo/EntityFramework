@@ -10,17 +10,17 @@ using JetBrains.Annotations;
 
 namespace Microsoft.Data.Entity.Sqlite
 {
-    public class SqliteCompositeMethodCallTranslator : RelationalCompositeMethodCallTranslator
+    public class SqliteCompositeMemberTranslator : RelationalCompositeMemberTranslator
     {
-        private List<IMethodCallTranslator> _sqliteTranslators;
+        private List<IMemberTranslator> _sqliteTranslators;
 
-        public SqliteCompositeMethodCallTranslator([NotNull] ILoggerFactory loggerFactory)
+        public SqliteCompositeMemberTranslator([NotNull] ILoggerFactory loggerFactory)
             : base(loggerFactory)
         {
-            _sqliteTranslators = new List<IMethodCallTranslator>();
+            _sqliteTranslators = new List<IMemberTranslator>();
         }
 
-        protected override IReadOnlyList<IMethodCallTranslator> Translators
+        protected override IReadOnlyList<IMemberTranslator> Translators
             => base.Translators.Concat(_sqliteTranslators).ToList();
     }
 }

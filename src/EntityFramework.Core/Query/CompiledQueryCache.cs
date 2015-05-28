@@ -444,6 +444,14 @@ namespace Microsoft.Data.Entity.Query
                     ? (Expression)new PropertyEvaluationPreventingExpression(expression)
                     : expression;
             }
+
+            protected override Expression VisitSubQueryExpression(SubQueryExpression expression)
+            {
+                var clonedModel = expression.QueryModel.Clone();
+                clonedModel.TransformExpressions(VisitExpression);
+
+                return new SubQueryExpression(clonedModel);
+            }
         }
 
         private class FunctionEvaluationEnablingVisitor : ExpressionTreeVisitorBase
@@ -467,9 +475,10 @@ namespace Microsoft.Data.Entity.Query
 
             protected override Expression VisitSubQueryExpression(SubQueryExpression expression)
             {
-                expression.QueryModel.TransformExpressions(VisitExpression);
+                var clonedModel = expression.QueryModel.Clone();
+                clonedModel.TransformExpressions(VisitExpression);
 
-                return expression;
+                return new SubQueryExpression(clonedModel);
             }
         }
 

@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace Microsoft.Data.Entity.SqlServer.Query.Methods
 {
-    public class StringLengthTranslator : IPropertyTranslator
+    public class StringLengthTranslator : IMemberTranslator
     {
         public virtual Expression Translate([NotNull] MemberExpression memberExpression)
         {

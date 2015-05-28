@@ -18,9 +18,10 @@ namespace Microsoft.Data.Entity.Query.ExpressionTreeVisitors
 
         protected override Expression VisitSubQueryExpression(SubQueryExpression expression)
         {
-            expression.QueryModel.TransformExpressions(VisitExpression);
+            var clonedModel = expression.QueryModel.Clone();
+            clonedModel.TransformExpressions(VisitExpression);
 
-            return expression;
+            return new SubQueryExpression(clonedModel);
         }
     }
 }

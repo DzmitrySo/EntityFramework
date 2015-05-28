@@ -1,7 +1,6 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using JetBrains.Annotations;
 using Microsoft.Data.Entity.ChangeTracking.Internal;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
@@ -12,8 +11,8 @@ using Microsoft.Data.Entity.Relational.Query;
 using Microsoft.Data.Entity.Relational.Query.Methods;
 using Microsoft.Data.Entity.Relational.Update;
 using Microsoft.Data.Entity.Sqlite.Query;
-using Microsoft.Data.Entity.Sqlite.Update;
 using Microsoft.Framework.Logging;
+using JetBrains.Annotations;
 
 namespace Microsoft.Data.Entity.Sqlite
 {
@@ -30,7 +29,8 @@ namespace Microsoft.Data.Entity.Sqlite
             [NotNull] IDbContextOptions options,
             [NotNull] ILoggerFactory loggerFactory,
             [NotNull] IRelationalValueBufferFactoryFactory valueBufferFactoryFactory,
-            [NotNull] IRelationalFunctionTranslationProvider functionTranslationProvider)
+            [NotNull] IMethodCallTranslator compositeMethodCallTranslator,
+            [NotNull] IMemberTranslator compositeMemberTranslator)
             : base(
                   model,
                   entityKeyFactorySource,
@@ -42,7 +42,8 @@ namespace Microsoft.Data.Entity.Sqlite
                   options,
                   loggerFactory,
                   valueBufferFactoryFactory,
-                  functionTranslationProvider)
+                  compositeMethodCallTranslator,
+                  compositeMemberTranslator)
         {
         }
 
@@ -50,7 +51,8 @@ namespace Microsoft.Data.Entity.Sqlite
             ILinqOperatorProvider linqOperatorProvider,
             IResultOperatorHandler resultOperatorHandler,
             IQueryMethodProvider queryMethodProvider,
-            IRelationalFunctionTranslationProvider functionTranslationProvider) =>
+            IMethodCallTranslator compositeMethodCallTranslator,
+            IMemberTranslator compositeMemberTranslator) =>
             new SqliteQueryCompilationContext(
                 Model,
                 Logger,
@@ -60,7 +62,8 @@ namespace Microsoft.Data.Entity.Sqlite
                 ClrPropertyGetterSource,
                 EntityKeyFactorySource,
                 queryMethodProvider,
-                functionTranslationProvider,
+                compositeMethodCallTranslator,
+                compositeMemberTranslator,
                 ValueBufferFactoryFactory);
     }
 }

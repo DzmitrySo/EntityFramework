@@ -68,7 +68,6 @@
     <Compile Include="IRelationalConnection.cs" />
     <Compile Include="IRelationalDataStore.cs" />
     <Compile Include="IRelationalDataStoreCreator.cs" />
-    <Compile Include="IRelationalFunctionTranslationProvider.cs" />
     <Compile Include="IRelationalTypeMapper.cs" />
     <Compile Include="IRelationalValueBufferFactoryFactory.cs" />
     <Compile Include="ISqlGenerator.cs" />
@@ -153,8 +152,9 @@
     <Compile Include="Migrations\Infrastructure\ModelDiffer.cs" />
     <Compile Include="Query\Expressions\SqlFunctionExpression.cs" />
     <Compile Include="Query\IValueBufferCursor.cs" />
-    <Compile Include="Query\Methods\IPropertyTranslator.cs" />
-    <Compile Include="Query\RelationalFunctionTranslationProvider.cs" />
+    <Compile Include="Query\Methods\IMemberTranslator.cs" />
+    <Compile Include="Query\RelationalCompositeMethodCallTranslator.cs" />
+    <Compile Include="Query\RelationalCompositeMemberTranslator.cs" />
     <Compile Include="RelationalDatabaseFactory.cs" />
     <Compile Include="RelationalDataStoreServices.cs" />
     <Compile Include="RemappingUntypedValueBufferFactory.cs" />

@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 
 namespace Microsoft.Data.Entity.Relational.Query.Methods
 {
-    public interface IPropertyTranslator
+    public interface IMemberTranslator
     {
         Expression Translate([NotNull] MemberExpression memberExpression);
     }

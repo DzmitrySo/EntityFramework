@@ -224,13 +224,10 @@ namespace Microsoft.Data.Entity.Relational.Query.ExpressionTreeVisitors
                         ? Expression.Call(operand, methodCallExpression.Method, arguments)
                         : Expression.Call(methodCallExpression.Method, arguments);
 
-                    foreach (var methodCallTranslator in _queryModelVisitor.QueryCompilationContext.FunctionTranslationProvider.MethodCallTranslators)
+                    var translatedExpression = _queryModelVisitor.QueryCompilationContext.CompositeMethodCallTranslator.Translate(boundExpression);
+                    if (translatedExpression != null)
                     {
-                        var translatedMethodCall = methodCallTranslator.Translate(boundExpression);
-                        if (translatedMethodCall != null)
-                        {
-                            return translatedMethodCall;
-                        }
+                        return translatedExpression;
                     }
                 }
             }
@@ -257,13 +254,10 @@ namespace Microsoft.Data.Entity.Relational.Query.ExpressionTreeVisitors
                     ? Expression.Property(newExpression, memberExpression.Member.Name)
                     : memberExpression;
 
-                foreach (var propertyTranslator in _queryModelVisitor.QueryCompilationContext.FunctionTranslationProvider.PropertyTranslators)
+                var translatedExpression = _queryModelVisitor.QueryCompilationContext.CompositeMemberTranslator.Translate(newMemberExpression);
+                if (translatedExpression != null)
                 {
-                    var translatedProperty = propertyTranslator.Translate(newMemberExpression);
-                    if (translatedProperty != null)
-                    {
-                        return translatedProperty;
-                    }
+                    return translatedExpression;
                 }
             }
 

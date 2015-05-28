@@ -28,7 +28,8 @@ namespace Microsoft.Data.Entity.SqlServer.Query
             [NotNull] IEntityKeyFactorySource entityKeyFactorySource,
             [NotNull] IClrAccessorSource<IClrPropertyGetter> clrPropertyGetterSource,
             [NotNull] IQueryMethodProvider queryMethodProvider,
-            [NotNull] IRelationalFunctionTranslationProvider methodCallTranslatorProvider,
+            [NotNull] IMethodCallTranslator compositeMethodCallTranslator,
+            [NotNull] IMemberTranslator compositeMembrTranslator,
             [NotNull] IRelationalValueBufferFactoryFactory valueBufferFactoryFactory)
             : base(
                 Check.NotNull(model, nameof(model)),
@@ -39,7 +40,8 @@ namespace Microsoft.Data.Entity.SqlServer.Query
                 Check.NotNull(entityKeyFactorySource, nameof(entityKeyFactorySource)),
                 Check.NotNull(clrPropertyGetterSource, nameof(clrPropertyGetterSource)),
                 Check.NotNull(queryMethodProvider, nameof(queryMethodProvider)),
-                Check.NotNull(methodCallTranslatorProvider, nameof(methodCallTranslatorProvider)),
+                Check.NotNull(compositeMethodCallTranslator, nameof(compositeMethodCallTranslator)),
+                Check.NotNull(compositeMembrTranslator, nameof(compositeMembrTranslator)),
                 Check.NotNull(valueBufferFactoryFactory, nameof(valueBufferFactoryFactory)))
         {
         }

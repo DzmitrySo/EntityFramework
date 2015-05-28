@@ -11,16 +11,14 @@ using JetBrains.Annotations;
 
 namespace Microsoft.Data.Entity.SqlServer
 {
-    public class SqlServerFunctionTranslationProvider : RelationalFunctionTranslationProvider
+    public class SqlServerCompositeMethodCallTranslator : RelationalCompositeMethodCallTranslator
     {
-        private List<IMethodCallTranslator> _sqlServerMethodCallTranslators;
+        private List<IMethodCallTranslator> _sqlServerTranslators;
 
-        private List<IPropertyTranslator> _sqlServerPropertyTranslators;
-
-        public SqlServerFunctionTranslationProvider([NotNull] ILoggerFactory loggerFactory)
+        public SqlServerCompositeMethodCallTranslator([NotNull] ILoggerFactory loggerFactory)
             : base(loggerFactory)
         {
-            _sqlServerMethodCallTranslators = new List<IMethodCallTranslator>
+            _sqlServerTranslators = new List<IMethodCallTranslator>
             {
                 new NewGuidTranslator(),
                 new StringSubstringTranslator(),
@@ -34,18 +32,9 @@ namespace Microsoft.Data.Entity.SqlServer
                 new StringToLowerTranslator(),
                 new StringToUpperTranslator(),
             };
-
-            _sqlServerPropertyTranslators = new List<IPropertyTranslator>
-            {
-                new StringLengthTranslator(),
-                new DateTimeNowTranslator(),
-            };
         }
 
-        public override IReadOnlyList<IMethodCallTranslator> MethodCallTranslators 
-            => base.MethodCallTranslators.Concat(_sqlServerMethodCallTranslators).ToList();
-
-        public override IReadOnlyList<IPropertyTranslator> PropertyTranslators
-            => base.PropertyTranslators.Concat(_sqlServerPropertyTranslators).ToList();
+        protected override IReadOnlyList<IMethodCallTranslator> Translators 
+            => base.Translators.Concat(_sqlServerTranslators).ToList();
     }
 }

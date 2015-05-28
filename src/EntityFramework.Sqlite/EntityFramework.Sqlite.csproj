@@ -76,6 +76,7 @@
     <Compile Include="Migrations\SqliteMigrationSqlGenerator.cs" />
     <Compile Include="Query\SqliteQueryCompilationContext.cs" />
     <Compile Include="Query\SqliteQueryGenerator.cs" />
+    <Compile Include="SqliteCompositeMemberTranslator.cs" />
     <Compile Include="SqliteDataStoreConnection.cs" />
     <Compile Include="SqliteDataStoreCreator.cs" />
     <Compile Include="SqliteFunctionTranslationProvider.cs" />

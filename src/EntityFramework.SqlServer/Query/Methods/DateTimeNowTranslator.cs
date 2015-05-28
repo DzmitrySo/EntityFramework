@@ -10,7 +10,7 @@ using JetBrains.Annotations;
 
 namespace Microsoft.Data.Entity.SqlServer.Query.Methods
 {
-    public class DateTimeNowTranslator : IPropertyTranslator
+    public class DateTimeNowTranslator : IMemberTranslator
     {
         public virtual Expression Translate([NotNull] MemberExpression memberExpression)
         {

@@ -31,7 +31,8 @@ namespace Microsoft.Data.Entity.SqlServer
             [NotNull] IDbContextOptions options,
             [NotNull] ILoggerFactory loggerFactory,
             [NotNull] IRelationalValueBufferFactoryFactory valueBufferFactoryFactory,
-            [NotNull] IRelationalFunctionTranslationProvider methodCallTranslatorProvider)
+            [NotNull] IMethodCallTranslator compositeMethodCallTranslator,
+            [NotNull] IMemberTranslator compositeMemberTranslator)
             : base(
                 Check.NotNull(model, nameof(model)),
                 Check.NotNull(entityKeyFactorySource, nameof(entityKeyFactorySource)),
@@ -43,7 +44,8 @@ namespace Microsoft.Data.Entity.SqlServer
                 Check.NotNull(options, nameof(options)),
                 Check.NotNull(loggerFactory, nameof(loggerFactory)),
                 Check.NotNull(valueBufferFactoryFactory, nameof(valueBufferFactoryFactory)),
-                Check.NotNull(methodCallTranslatorProvider, nameof(methodCallTranslatorProvider)))
+                Check.NotNull(compositeMethodCallTranslator, nameof(compositeMethodCallTranslator)),
+                Check.NotNull(compositeMemberTranslator, nameof(compositeMemberTranslator)))
         {
         }
 
@@ -51,12 +53,14 @@ namespace Microsoft.Data.Entity.SqlServer
             ILinqOperatorProvider linqOperatorProvider,
             IResultOperatorHandler resultOperatorHandler,
             IQueryMethodProvider enumerableMethodProvider,
-            IRelationalFunctionTranslationProvider methodCallTranslatorProvider)
+            IMethodCallTranslator compositeMethodCallTranslator,
+            IMemberTranslator compositeMemberTranslator)
         {
             Check.NotNull(linqOperatorProvider, nameof(linqOperatorProvider));
             Check.NotNull(resultOperatorHandler, nameof(resultOperatorHandler));
             Check.NotNull(enumerableMethodProvider, nameof(enumerableMethodProvider));
-            Check.NotNull(methodCallTranslatorProvider, nameof(methodCallTranslatorProvider));
+            Check.NotNull(compositeMethodCallTranslator, nameof(compositeMethodCallTranslator));
+            Check.NotNull(compositeMemberTranslator, nameof(compositeMemberTranslator));
 
             return new SqlServerQueryCompilationContext(
                 Model,
@@ -67,7 +71,8 @@ namespace Microsoft.Data.Entity.SqlServer
                 EntityKeyFactorySource,
                 ClrPropertyGetterSource,
                 enumerableMethodProvider,
-                methodCallTranslatorProvider,
+                compositeMethodCallTranslator,
+                compositeMemberTranslator,
                 ValueBufferFactoryFactory);
         }
     }
