@@ -424,7 +424,8 @@ namespace Microsoft.Data.Entity.Query
             }
 
             return QueryCompilationContext.QueryAnnotations
-                .OfType<AsNoTrackingQueryAnnotation>()
+                .OfType<CustomQueryAnnotation>()
+                .Where(qa => qa.IsCallTo(EntityFrameworkQueryableExtensions.AsNoTrackingMethodInfo))
                 .All(qa => qa.QuerySource != querySource);
         }
 

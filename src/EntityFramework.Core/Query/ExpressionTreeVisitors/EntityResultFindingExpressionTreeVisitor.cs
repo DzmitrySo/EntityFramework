@@ -29,7 +29,8 @@ namespace Microsoft.Data.Entity.Query.ExpressionTreeVisitors
             _untrackedQuerySources
                 = new HashSet<IQuerySource>(
                     _queryCompilationContext.QueryAnnotations
-                        .OfType<AsNoTrackingQueryAnnotation>()
+                        .OfType<CustomQueryAnnotation>()
+                        .Where(qa => qa.IsCallTo(EntityFrameworkQueryableExtensions.AsNoTrackingMethodInfo))
                         .Select(qa => qa.QuerySource));
         }
 
